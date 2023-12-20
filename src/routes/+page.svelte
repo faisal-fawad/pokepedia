@@ -1,5 +1,6 @@
 <script>
     import { createSearchStore, searchHandler } from '$lib/stores/search'
+    import Loading from '$lib/components/loading.svelte';
     import { onDestroy, onMount } from 'svelte';
     import Entry from '$lib/components/entry.svelte';
 
@@ -58,7 +59,7 @@
     <hr/>
     <div class="entries">
         {#if loading}
-            <div>Loading...</div>
+            <Loading size=60/>
         {:else}
             {#each $store.filtered.slice(0, upper) as pokemon}
                 <Entry name={pokemon.name} id={pokemon.id} image={pokemon.image}/>

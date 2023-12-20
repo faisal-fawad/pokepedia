@@ -1,12 +1,9 @@
 <script>
+    import { capitalize } from '$lib/index.js';
+    
     export let name;
     export let id;
     export let image;
-
-    function capitalize(name) {
-        name = name.split('-').map(i => i[0].toUpperCase() + i.substring(1).toLowerCase()).join(' ');
-        return name;
-    }
 </script>
 
 <a class="entry" href={"/" + id}>
