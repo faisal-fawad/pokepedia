@@ -16,6 +16,7 @@
 
 <style>
     .entry {
+        display: inline-block;
         background: white;
         text-decoration: none;
         width: 200px;
@@ -49,8 +50,8 @@
 
     img {
         box-sizing: border-box;
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: calc(100% - 40px);
         padding: 10px;
         object-fit: contain;
         object-position: center;

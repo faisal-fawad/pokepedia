@@ -4,6 +4,6 @@ export async function load({ params, fetch, setHeaders }) {
     const cache = res.headers.get('cache-control');
     if (cache) setHeaders({ 'cache-control': cache });
     return {
-        pokemon: pokemon
+        pokemon
     }
 }

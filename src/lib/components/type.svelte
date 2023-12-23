@@ -17,7 +17,7 @@
 <style>
     ul {
         list-style: none;
-        margin: 4px 8px 4px 0;
+        margin: 0 8px 8px 0;
         padding: 0;
         display: inline-flex;
         align-items: center;

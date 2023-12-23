@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable } from 'svelte/store';
 
 export function createSearchStore(data) {
     const { subscribe, set, update } = writable({

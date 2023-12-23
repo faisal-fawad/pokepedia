@@ -2,6 +2,9 @@
 export function toUrl(id) {
     return 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' + id.padStart(3, '0') + '.png';
 }
+export function toId(url) {
+    return  url.split('pokemon-species')[1].replaceAll('/', '');
+}
 export function capitalize(name) {
     name = name.split('-').map(i => i[0].toUpperCase() + i.substring(1).toLowerCase()).join(' ');
     return name;
@@ -28,6 +31,6 @@ export const typeToColor = {
     water: "#539DDF"
 }
 export function dimColor(color) {
-    return "color-mix(in srgb, " + color + " 50%, rgb(130, 130, 130))";
-} 
+    return `color-mix(in srgb, ${color} 50%, rgb(130, 130, 130))`;
+}
 

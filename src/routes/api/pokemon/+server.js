@@ -1,12 +1,12 @@
 import { json } from '@sveltejs/kit';
-import { api, toUrl } from '$lib/index.js';
+import { api, toUrl, toId } from '$lib/index.js';
 
 export async function GET({ setHeaders }) {
     const res = await fetch(api + 'pokemon-species?limit=100000');
     let data = (await res.json()).results;
     let invalid = true;
     for (var i = data.length - 1; i >= 0; i--) {
-        data[i]['id'] = data[i]['url'].split('pokemon-species')[1].replaceAll('/', '');
+        data[i]['id'] = toId(data[i]['url']);
         let url = toUrl(data[i]['id']);
         // Ensures only pokemon with official artwork are rendered
         if (invalid) {
