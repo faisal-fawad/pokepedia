@@ -13,7 +13,7 @@
         <Pokemon pokemon={data.pokemon}/>
     </div>
     <div class="data-container">
-        <Evolution evolution={data.pokemon.evolution}/>
+        <Evolution data={data.pokemon}/>
         <Moves data={data.pokemon}/>
     </div>
 </div>

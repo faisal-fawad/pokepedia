@@ -2,6 +2,9 @@
     import { capitalize, dimColor } from '$lib/index.js';
     import { createMoveStore, filterHandler } from '$lib/stores/moves.js';
     import { onDestroy } from 'svelte';
+    import Dropdown from '$lib/components/dropdown.svelte';
+    import Title from '$lib/components/title.svelte';
+
     export let data;
     let moves = data.moves;
     let versions = data.versions;
@@ -17,65 +20,84 @@
     })
 </script>
 
-<div class="container" {style}>
-    <select bind:value={$store.version}>
-    {#each versions as version}
-        <option value={version}>{capitalize(version).toUpperCase()}</option>
-    {/each}
-    </select>
-    <table border=1 frame=void rules=rows>
-        <tr {style}>
-            <th>Level</th>
-            <th class="names">Name</th>
-            <th>Method</th>
-        </tr>
-        {#each $store.filtered as move}
-            <tr>
-                <td>{move.level ? move.level : "-"}</td>
-                <td class="names">{capitalize(move.name)}</td>
-                <td class="methods">{capitalize(move.method).toUpperCase()}</td>
-            </tr>
-        {/each}
-    </table>
+<div class="container">
+    <Title text={"MOVESET"} color={data.color}/>
+    <div class="inner-container">
+        <div class="wrapper">
+            <ul class="titles" {style}>
+                <li>Level</li>
+                <li>Name</li>
+            </ul>
+            <div class="moves-container">
+            {#each $store.filtered as move, i}
+                <ul class="move">
+                    <li>{move.level ? move.level : "-"}</li>
+                    <li>{capitalize(move.name)}</li>
+                </ul>
+            {/each}
+            </div>
+            <ul class="titles" style={style + "border-radius: 0 0 10px 10px;"}><li style={"text-align: center;"}>Version</li></ul>
+        </div>
+        <Dropdown bind:value={$store.version} options={versions}/>
+    </div>
 </div>
 
 <style>
     .container {
+        align-items: center;
+    }
+
+    .container, .inner-container {
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
+    }
+
+    .inner-container {
+        position: relative;
+        width: 500px;
+        border-radius: 10px;
         overflow: hidden;
     }
 
-    select, option {
-        font-family: 'Inter', sans-serif;
-        font-weight: normal;
-        outline: none;
-        font-size: .8rem;
-        background: transparent;
-        border: 1px solid transparent;
+    .moves-container {
+        overflow: auto;
+        height: 200px;
+        background-color: var(--entry-background);
     }
 
-    table, select {
-        text-align: center;
-        width: 400px;
+    .wrapper {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        overflow: hidden;
     }
 
-    select:hover {
-        filter: saturate(150%);
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
     }
 
-    .names {
-        text-align: left;
+    .move:hover {
+        background-color: var(--entry-background-hover);
     }
 
-    td, th {
-        font-weight: normal;
-        padding: .25em;
-    }
-    
-    th {
-        color: white;
+    .titles li {
+        color: white !important;
+        font-weight: 500;
     }
 
+    li {
+        padding: 5px 10px;
+    }
+
+    li:first-child {
+        width: 50px;
+        color: var(--entry-light-text);
+    }
+
+    li:last-child {
+        flex-grow: 1;
+        color: var(--entry-dark-text);
+    }
 </style>

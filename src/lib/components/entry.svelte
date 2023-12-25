@@ -17,24 +17,24 @@
 <style>
     .entry {
         display: inline-block;
-        background: white;
+        background-color: var(--entry-background);
         text-decoration: none;
         width: 200px;
         height: 240px;
-        border: 1px solid black;
+        transition: background-color .5s;
     }
 
     .entry:hover {
-        transform: scale(1.05);
+        background-color: var(--entry-background-hover);
     }
 
     .name {
-        color: black;
+        color: var(--entry-dark-text);
         font-weight: 500;
     }
 
     .id {
-        color: gray;
+        color: var(--entry-light-text);
     }
 
     ul {

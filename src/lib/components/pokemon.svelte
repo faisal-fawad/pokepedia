@@ -7,7 +7,7 @@
     let abilities = pokemon.abilities.map(a => a.is_hidden ? a.ability.name + " [HA]" : a.ability.name);
 </script>
 
-<div class="card" style ={"box-shadow: 0 0 100px color-mix(in srgb, " + pokemon.color + " 40%, white);"}>
+<div class="card" style ={"box-shadow: 0 0 100px color-mix(in srgb, " + pokemon.color + " 40%, black);"}>
     <div class="title">{pokemon.name.toUpperCase()}</div>
     <div class="content">
         <img src={pokemon.image} alt={"Image of " + pokemon.name}>
@@ -28,14 +28,13 @@
                 <div class="header">Type</div>
                 <span>
                 {#each types as type}
-                    <Type name={type} showName={true} />
+                    <Type name={type} showName={true}/>
                 {/each}
                 </span>
             <li>
                 <div class="header">Abilities</div>
                 <span>
                 {#each abilities as ability}
-                    
                     <div class="color" {style}>{capitalize(ability).toUpperCase()}</div>
                 {/each}
                 </span>
@@ -64,13 +63,15 @@
         display: inline-flex; 
         align-items: center;
         border-radius: 10px;
-        font-size: 16px; 
+        font-size: .9em; 
     }
 
     .card {
         display: inline-block;
         padding: 25px;
         border-radius: 25px;
+        background-color: var(--entry-background);
+        color: var(--entry-dark-text);
     }
 
     .content {
@@ -80,9 +81,9 @@
 
     .title {
         text-align: center;
-        font-size: 50px;
+        font-size: 3.25em;
         font-weight: 500;
-        letter-spacing: -2px;
+        letter-spacing: -1px;
         padding-bottom: 25px;
     }
 
@@ -115,6 +116,6 @@
 
     ul li span {
         width: calc(400px - 125px);
-        color: gray;
+        color: var(--entry-light-text);
     }
 </style>
