@@ -4,12 +4,18 @@
     export let name;
     export let id;
     export let image;
+    export let isChain;
+
+    let style = isChain ? "font-size: .95em; justify-content: center;" : "font-size: 1em; justify-content: space-between;";
+    let size = isChain ? "height: 200px; width: 160px;" : "height: 240px; width: 200px;"; 
 </script>
 
-<a class="entry" href={"/" + id}>
-    <ul>
+<a class="entry" href={"/" + id} style={size}>
+    <ul {style}>
         <li class="name">{capitalize(name)}</li>
+        {#if !isChain}
         <li class="id">{"#" + id}</li>
+        {/if}
     </ul>
     <img src={image} alt={"Image of " + capitalize(name)}/>
 </a>
@@ -19,8 +25,6 @@
         display: inline-block;
         background-color: var(--entry-background);
         text-decoration: none;
-        width: 200px;
-        height: 240px;
         transition: background-color .5s;
     }
 

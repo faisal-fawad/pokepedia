@@ -16,24 +16,27 @@
     })
 </script>
 
-<nav>
-    <label class="switch">
-        <input type="checkbox" on:click={toggle} bind:checked={checked}>
-        <span class="slider"></span>
-    </label>
-    <a href="/">Poképedia</a>
-</nav>
+<div class="container">
+    <nav>
+        <label class="switch">
+            <input type="checkbox" on:click={toggle} bind:checked={checked}>
+            <span class="slider"></span>
+        </label>
+        <a href="/">Poképedia</a>
+    </nav>
+</div>
 
 <slot></slot>
 
 <style>
     :global(body) {
-        background: var(--theme-background);
+        background-color: var(--theme-background);
         --theme-background: white;
         --entry-background: rgb(240, 240, 240);
         --entry-background-hover: rgb(220, 220, 220);
         --entry-dark-text: black;
         --entry-light-text: rgb(100, 100, 100);
+        --nav-background: rgb(250, 250, 250);
     }
 
     :global(body.dark-mode) {
@@ -42,12 +45,19 @@
         --entry-background-hover: rgb(50, 50, 50);
         --entry-dark-text: white;
         --entry-light-text: rgb(200, 200, 200);
+        --nav-background: rgb(15, 15, 15);
+    }
+
+    .container {
+        width: 100%;
+        height: 75px;
     }
 
     nav {
         width: 100%;
         height: 75px;
-        background: gray;
+        background-color: var(--nav-background);
+        position: fixed;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -56,9 +66,10 @@
 
     a {
         font-size: 2em;
+        font-weight: 500;
         padding: 20px;
         text-decoration: none;
-        color: white;
+        color: var(--entry-dark-text);
     }
 
     /* Slider code */
@@ -99,8 +110,8 @@
         left: 4px;
         bottom: 4px;
         background-color: white;
-        transition: .4s;
-        border-radius: 50%;
+        transition: .5s;
+        border-radius: 13px;
     }
 
     input:checked + .slider {

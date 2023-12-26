@@ -4,7 +4,7 @@
     export let text;
     export let color;
 
-    let style = "background: " + dimColor(color) + ";";
+    $: style = "background: " + dimColor(color) + ";";
 </script>
 
 <div {style}>{text}</div>
@@ -18,5 +18,6 @@
         padding: 2.5px 10px;
         border-radius: 10px;
         margin-bottom: 25px;
+        white-space: nowrap;
     }
 </style>

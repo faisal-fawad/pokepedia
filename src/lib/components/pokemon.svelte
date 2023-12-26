@@ -1,13 +1,14 @@
 <script>
     import { dimColor, capitalize } from '$lib/index.js'
     import Type from "$lib/components/type.svelte";
+    
     export let pokemon;
-    let style = "background: " + dimColor(pokemon.color) + ";";
-    let types = pokemon.types.map(t => t.type.name);
-    let abilities = pokemon.abilities.map(a => a.is_hidden ? a.ability.name + " [HA]" : a.ability.name);
+    $: style = "background: " + dimColor(pokemon.color) + ";";
+    $: types = pokemon.types.map(t => t.type.name);
+    $: abilities = pokemon.abilities.map(a => a.is_hidden ? a.ability.name + " [HA]" : a.ability.name);
 </script>
 
-<div class="card" style ={"box-shadow: 0 0 100px color-mix(in srgb, " + pokemon.color + " 40%, black);"}>
+<div class="card" style={"box-shadow: 0 0 50px color-mix(in srgb, " + pokemon.color + " 50%, black);"}>
     <div class="title">{pokemon.name.toUpperCase()}</div>
     <div class="content">
         <img src={pokemon.image} alt={"Image of " + pokemon.name}>

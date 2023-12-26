@@ -1,6 +1,5 @@
 <script>
     import { createSearchStore, searchHandler } from '$lib/stores/search'
-    import search from '$lib/assets/search.svg';
     import Loading from '$lib/components/loading.svelte';
     import { onDestroy, onMount } from 'svelte';
     import Entry from '$lib/components/entry.svelte';
@@ -68,7 +67,7 @@
             <Loading size=60/>
         {:else}
             {#each $store.filtered.slice(0, upper) as pokemon}
-                <Entry name={pokemon.name} id={pokemon.id} image={pokemon.image}/>
+                <Entry name={pokemon.name} id={pokemon.id} image={pokemon.image} isChain={false}/>
             {/each}
         {/if}
     </div>

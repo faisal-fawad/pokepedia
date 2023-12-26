@@ -1,19 +1,23 @@
 <script>
     import { capitalize, dimColor } from '$lib/index.js';
     import { createMoveStore, filterHandler } from '$lib/stores/moves.js';
+    import { height } from '$lib/stores/height.js';
     import { onDestroy } from 'svelte';
     import Dropdown from '$lib/components/dropdown.svelte';
     import Title from '$lib/components/title.svelte';
 
-    export let data;
-    let moves = data.moves;
-    let versions = data.versions;
-    let style = "background: " + dimColor(data.color) + ";";
-
-    const store = createMoveStore(moves, versions[0]);
+    export let pokemon;
+    const store = createMoveStore(pokemon.moves, pokemon.versions[0]);
     const unsubscribe = store.subscribe(model => {
         filterHandler(model);
-    })
+    });
+
+    $: style = "background: " + dimColor(pokemon.color) + ";";
+    $: store.set({
+        data: pokemon.moves,
+        filtered: pokemon.moves,
+        version: pokemon.versions[0]
+    });
 
     onDestroy(async () => {
         unsubscribe();
@@ -21,8 +25,8 @@
 </script>
 
 <div class="container">
-    <Title text={"MOVESET"} color={data.color}/>
-    <div class="inner-container">
+    <Title text={"MOVESET"} color={pokemon.color}/>
+    <div class="inner-container" style={"height: " + $height + "px;"}>
         <div class="wrapper">
             <ul class="titles" {style}>
                 <li>Level</li>
@@ -32,13 +36,13 @@
             {#each $store.filtered as move, i}
                 <ul class="move">
                     <li>{move.level ? move.level : "-"}</li>
-                    <li>{capitalize(move.name)}</li>
+                    <li>{i + ": " + capitalize(move.name)}</li>
                 </ul>
             {/each}
             </div>
             <ul class="titles" style={style + "border-radius: 0 0 10px 10px;"}><li style={"text-align: center;"}>Version</li></ul>
         </div>
-        <Dropdown bind:value={$store.version} options={versions}/>
+        <Dropdown bind:value={$store.version} options={pokemon.versions}/>
     </div>
 </div>
 
@@ -47,25 +51,28 @@
         align-items: center;
     }
 
+    .inner-container {
+        position: relative;
+        width: 500px;
+        min-height: calc(120px + 30px * 6);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
     .container, .inner-container {
         display: flex;
         flex-direction: column;
     }
 
-    .inner-container {
-        position: relative;
-        width: 500px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
     .moves-container {
         overflow: auto;
-        height: 200px;
+        flex-grow: 1;
+        height: calc(100% - 60px) /* 60px come from top and bottom */;
         background-color: var(--entry-background);
     }
 
     .wrapper {
+        height: 100%;
         border-radius: 10px;
         margin-bottom: 10px;
         overflow: hidden;
@@ -76,6 +83,10 @@
         padding: 0;
         margin: 0;
         display: flex;
+    }
+    
+    .move {
+        cursor: default;
     }
 
     .move:hover {

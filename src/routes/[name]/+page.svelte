@@ -13,8 +13,9 @@
         <Pokemon pokemon={data.pokemon}/>
     </div>
     <div class="data-container">
-        <Evolution data={data.pokemon}/>
-        <Moves data={data.pokemon}/>
+        <Evolution pokemon={data.pokemon}/>
+        <hr/>
+        <Moves pokemon={data.pokemon}/>
     </div>
 </div>
 
@@ -33,8 +34,18 @@
     }
 
     .data-container {
+        box-sizing: border-box;
         width: 100%;
+        padding: 0 50px;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+        margin-bottom: 100px;
+    }
+
+    hr {
+        padding: 0;
+        margin: 0;
+        width: 100px;
+        border: none;
     }
 </style>
