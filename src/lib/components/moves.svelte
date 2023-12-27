@@ -36,7 +36,7 @@
             {#each $store.filtered as move, i}
                 <ul class="move">
                     <li>{move.level ? move.level : "-"}</li>
-                    <li>{i + ": " + capitalize(move.name)}</li>
+                    <li>{capitalize(move.name)}</li>
                 </ul>
             {/each}
             </div>
@@ -68,6 +68,7 @@
         overflow: auto;
         flex-grow: 1;
         height: calc(100% - 60px) /* 60px come from top and bottom */;
+        transition: .5s;
         background-color: var(--entry-background);
     }
 
@@ -87,6 +88,7 @@
     
     .move {
         cursor: default;
+        transition: .25s;
     }
 
     .move:hover {
@@ -100,6 +102,7 @@
 
     li {
         padding: 5px 10px;
+        transition: .5s;
     }
 
     li:first-child {
@@ -110,5 +113,16 @@
     li:last-child {
         flex-grow: 1;
         color: var(--entry-dark-text);
+    }
+
+    @media only screen and (max-width: 750px) {
+        .inner-container {
+            height: 500px !important;
+            width: 80vw;
+        }
+
+        li {
+            font-size: .9em;
+        }
     }
 </style>

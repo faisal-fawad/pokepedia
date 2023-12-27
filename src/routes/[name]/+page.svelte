@@ -36,16 +36,30 @@
     .data-container {
         box-sizing: border-box;
         width: 100%;
-        padding: 0 50px;
+        padding: 0 200px;
         display: flex;
         justify-content: center;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
     }
 
     hr {
         padding: 0;
         margin: 0;
-        width: 100px;
+        min-width: 100px;
+        min-height: 100px;
         border: none;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .data-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    @media only screen and (max-width: 750px) {
+        .data-container {
+            padding: 0;
+        }
     }
 </style>

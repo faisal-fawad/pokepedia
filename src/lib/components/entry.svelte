@@ -5,13 +5,10 @@
     export let id;
     export let image;
     export let isChain;
-
-    let style = isChain ? "font-size: .95em; justify-content: center;" : "font-size: 1em; justify-content: space-between;";
-    let size = isChain ? "height: 200px; width: 160px;" : "height: 240px; width: 200px;"; 
 </script>
 
-<a class="entry" href={"/" + id} style={size}>
-    <ul {style}>
+<a class={isChain ? "chain-a" : ""} href={"/" + id}>
+    <ul class={isChain ? "chain-ul" : ""}>
         <li class="name">{capitalize(name)}</li>
         {#if !isChain}
         <li class="id">{"#" + id}</li>
@@ -21,14 +18,22 @@
 </a>
 
 <style>
-    .entry {
+    a {
         display: inline-block;
         background-color: var(--entry-background);
         text-decoration: none;
-        transition: background-color .5s;
+        transition: .5s;
+        height: 240px;
+        width: 200px;
     }
 
-    .entry:hover {
+    .chain-a {
+        transition: .5s;
+        height: 200px;
+        width: 160px;
+    }
+
+    a:hover {
         background-color: var(--entry-background-hover);
     }
 
@@ -50,6 +55,12 @@
         display: flex;
         list-style: none;
         justify-content: space-between;
+        font-size: 1em;
+    }
+
+    .chain-ul {
+        justify-content: center;
+        font-size: .95em;
     }
 
     img {
@@ -61,4 +72,18 @@
         object-position: center;
     }
 
+    li {
+        transition: .5s;
+    }
+
+    @media only screen and (max-width: 750px) {
+        ul, .chain-ul {
+            font-size: .9em;
+        }
+
+        a {
+            height: 200px;
+            width: 160px;
+        }
+    }
 </style>

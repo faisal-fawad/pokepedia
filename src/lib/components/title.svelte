@@ -20,4 +20,11 @@
         margin-bottom: 25px;
         white-space: nowrap;
     }
+
+    @media only screen and (max-width: 750px) {
+        div {
+            font-size: 1.75em;
+            font-weight: 400;
+        }
+    }
 </style>

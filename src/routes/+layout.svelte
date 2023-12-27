@@ -30,6 +30,7 @@
 
 <style>
     :global(body) {
+        transition: .5s;
         background-color: var(--theme-background);
         --theme-background: white;
         --entry-background: rgb(240, 240, 240);
@@ -57,19 +58,33 @@
         width: 100%;
         height: 75px;
         background-color: var(--nav-background);
+        z-index: 1;
         position: fixed;
         display: flex;
         justify-content: space-between;
         align-items: center;
         overflow: hidden;
+        transition: .5s;
     }
 
     a {
         font-size: 2em;
+        letter-spacing: -1px;
         font-weight: 500;
         padding: 20px;
         text-decoration: none;
+        transition: .5s;
         color: var(--entry-dark-text);
+    }
+
+    @media only screen and (max-width: 750px) {
+        .container, nav {
+            height: 60px;
+        }
+
+        a {
+            font-size: 1.75em;
+        }
     }
 
     /* Slider code */

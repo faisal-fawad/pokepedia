@@ -34,6 +34,7 @@
     svg {
         width: 50px;
         height: 50px;
+        transition: .5s;
         fill: var(--entry-background-hover);
     }
 
@@ -49,5 +50,11 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 5px;
+    }
+
+    @media only screen and (max-width: 750px) {
+        .container {
+            width: 90%;
+        }
     }
 </style>

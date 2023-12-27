@@ -100,6 +100,7 @@
         border-radius: 25px;
         overflow: hidden;
         display: flex;
+        transition: .5s;
         color: var(--entry-dark-text);
         background-color: var(--entry-background);
         box-shadow: 0 0 10px var(--entry-background);
@@ -113,6 +114,7 @@
         padding-left: 25px;
         border: none;
         font-size: 1em;
+        transition: .5s;
         color: var(--entry-dark-text);
         background-color: var(--entry-background);
     }
@@ -129,11 +131,14 @@
     .search-container svg {
         height: 20px;
         width: 20px;
+        min-height: 20px;
+        min-width: 20px;
         padding: 15px 25px 15px 15px;
         fill: var(--entry-light-text);
     }
 
     .load {
+        box-sizing: border-box;
         font-family: 'Inter', sans-serif;
         display: inline-block;
         width: 350px;
@@ -144,8 +149,9 @@
         box-shadow: 0 0 10px var(--entry-background);
         font-size: 1em;
         color: var(--entry-dark-text);
-        transition: background-color .5s;
+        transition: .5s;
         cursor: pointer;
+        padding: 0 10px;
     }
 
     .load:hover {
@@ -160,5 +166,27 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    @media only screen and (max-width: 750px) {
+        .search-container svg {
+            display: none;
+        }
+
+        .search-container {
+            width: 80%;
+        }
+
+        .search {
+            width: 100%;
+        }
+
+        .search-container svg {
+            flex-grow: 1;
+        }
+
+        .load {
+            width: 80%;
+        }
     }
 </style>

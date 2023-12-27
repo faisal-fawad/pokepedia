@@ -57,7 +57,7 @@
 <style>
     .color {
         color: white;
-        margin: 2px;
+        margin: 0 4px 4px 0;
         border-radius: 7.5px;
         height: 30px; 
         padding: 0 7.5px;
@@ -71,6 +71,7 @@
         display: inline-block;
         padding: 25px;
         border-radius: 25px;
+        transition: .5s;
         background-color: var(--entry-background);
         color: var(--entry-dark-text);
     }
@@ -89,8 +90,12 @@
     }
 
     img {
+        max-width: 475px;
+        max-height: 475px;
         width: 475px;
         height: 475px;
+        min-height: 200px;
+        min-width: 200px;
         padding: 12.5px;
         object-fit: contain;
         object-position: center;
@@ -109,14 +114,62 @@
         font-size: 18px;
     }
 
-    
     .header {
         width: 125px;
+        min-width: 125px;
         font-weight: 600;
     }
 
     ul li span {
         width: calc(400px - 125px);
         color: var(--entry-light-text);
+        transition: .5s;
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .content {
+            flex-direction: column;
+        }
+
+        ul {
+            padding: 10px 50px;
+        }
+    }
+
+    @media only screen and (max-width: 750px) {
+        .card {
+            width: 90%;
+            padding: 2.5%;
+            box-shadow: none !important;
+        }
+
+        img {
+            width: 70vw;
+            height: 70vw;
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: 400;
+        }
+        
+        ul {
+            width: auto;
+            padding: 10px;
+        }
+
+        ul li {
+            font-size: 15px;
+        }
+
+        .header {
+            min-width: 75px;
+            width: 75px;
+        }
+
+        ul li span {
+            width: auto;
+            color: var(--entry-light-text);
+        }
     }
 </style>
