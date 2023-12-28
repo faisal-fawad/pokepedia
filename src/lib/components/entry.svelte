@@ -14,7 +14,7 @@
         <li class="id">{"#" + id}</li>
         {/if}
     </ul>
-    <img src={image} alt={"Image of " + capitalize(name)}/>
+    <img loading="lazy" src={image} alt={"Image of " + capitalize(name)}/>
 </a>
 
 <style>

@@ -1,5 +1,8 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount } from 'svelte';
+    import { page } from '$app/stores';
+    import { fade, fly } from 'svelte/transition';
+    import Modes from '$lib/components/modes.svelte';
 
     let checked = false;
 
@@ -20,13 +23,20 @@
     <nav>
         <label class="switch">
             <input type="checkbox" on:click={toggle} bind:checked={checked}>
-            <span class="slider"></span>
+            <span class="slider">
+                <Modes/>
+            </span>
         </label>
         <a href="/">Poképedia</a>
     </nav>
 </div>
 
-<slot></slot>
+
+{#key $page.url.pathname}
+    <div in:fly={{ y: 200, duration: 1000 }}>
+        <slot/>
+    </div>
+{/key}
 
 <style>
     :global(body) {
@@ -112,7 +122,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #ccc;
+        background-color: var(--entry-background-hover);
         transition: .4s;
         border-radius: calc(34px / 2);
     }
@@ -124,13 +134,9 @@
         width: 26px;
         left: 4px;
         bottom: 4px;
-        background-color: white;
+        background-color: var(--entry-dark-text);
         transition: .5s;
         border-radius: 13px;
-    }
-
-    input:checked + .slider {
-        background-color: #2196F3;
     }
 
     input:checked + .slider:before {

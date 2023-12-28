@@ -1,6 +1,7 @@
 // Simple libraries
 export function toUrl(id) {
     return 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' + id.padStart(3, '0') + '.png';
+    // From PokeAPI: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png'
 }
 export function toId(url) {
     return  url.split('pokemon-species')[1].replaceAll('/', '');

@@ -1,5 +1,5 @@
 import { json, error } from '@sveltejs/kit';
-import { api, toUrl, capitalize } from '$lib/index.js';
+import { api, toUrl } from '$lib/index.js';
 import { bfs } from '$lib/functions/bfs.js';
 
 export async function GET({ setHeaders, params }) {
@@ -8,7 +8,10 @@ export async function GET({ setHeaders, params }) {
 
     // Check if the pokemon is in our list of supported pokemon (i.e. has an image) 
     let url = toUrl(data.id.toString());
-    if ((await fetch(url)).status !== 200) throw error(404, { message: 'Not found' });
+    if ((await fetch(url)).status !== 200) {
+        console.log('t')
+        throw error(404, { message: 'Not found' });
+    }
 
     let cleanData = {};
     cleanData['id'] = data.id.toString();
