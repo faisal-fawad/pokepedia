@@ -28,7 +28,7 @@
 
     ul:hover {
         filter: saturate(150%);
-        transform: scale(1.08);
+        transform: scale(1.05);
     }
 
     .wrapper {

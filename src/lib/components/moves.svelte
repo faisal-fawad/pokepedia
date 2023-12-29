@@ -116,9 +116,13 @@
     }
 
     @media only screen and (max-width: 750px) {
+        .container {
+            width: 100%;
+        }
+
         .inner-container {
             height: 500px !important;
-            width: 90vw;
+            width: 90%;
         }
 
         li {

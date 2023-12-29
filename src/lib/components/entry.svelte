@@ -5,8 +5,10 @@
     export let id;
     export let image;
     export let isChain;
+    let isStale = false; // Hide entries missing image
 </script>
 
+{#if !isStale}
 <a class={isChain ? "chain-a" : ""} href={"/" + id}>
     <ul class={isChain ? "chain-ul" : ""}>
         <li class="name">{capitalize(name)}</li>
@@ -14,8 +16,9 @@
         <li class="id">{"#" + id}</li>
         {/if}
     </ul>
-    <img loading="lazy" src={image} alt={"Image of " + capitalize(name)}/>
+    <img loading="lazy" src={image} on:error={() => isStale = true} alt={"Image of " + capitalize(name)}/>
 </a>
+{/if}
 
 <style>
     a {

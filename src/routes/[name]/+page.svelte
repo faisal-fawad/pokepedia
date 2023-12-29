@@ -8,7 +8,7 @@
     Which we can then use to align the moves height with the evolution tree height */
 </script>
 
-<div class="container">
+<main class="container">
     <div class="pokemon-container">
         <Pokemon pokemon={data.pokemon}/>
     </div>
@@ -17,7 +17,7 @@
         <hr/>
         <Moves pokemon={data.pokemon}/>
     </div>
-</div>
+</main>
 
 <style>
     .container {

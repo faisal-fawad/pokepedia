@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import { fade, fly } from 'svelte/transition';
+    import { fly } from 'svelte/transition';
     import Modes from '$lib/components/modes.svelte';
 
     let checked = false;
@@ -13,7 +13,6 @@
     onMount(async () => {
         // Detect dark mode
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            toggle();
             checked = true;
         } 
     })
@@ -22,7 +21,7 @@
 <div class="container">
     <nav>
         <label class="switch">
-            <input type="checkbox" on:click={toggle} bind:checked={checked}>
+            <input aria-label="search" id="mode" type="checkbox" on:click={toggle} bind:checked={checked}>
             <span class="slider">
                 <Modes/>
             </span>
@@ -57,6 +56,29 @@
         --entry-dark-text: white;
         --entry-light-text: rgb(200, 200, 200);
         --nav-background: rgb(15, 15, 15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        /* Flipping styles */
+        :global(body.dark-mode) {
+            transition: .5s;
+            background-color: var(--theme-background);
+            --theme-background: white;
+            --entry-background: rgb(240, 240, 240);
+            --entry-background-hover: rgb(220, 220, 220);
+            --entry-dark-text: black;
+            --entry-light-text: rgb(100, 100, 100);
+            --nav-background: rgb(250, 250, 250);
+        }
+
+        :global(body) {
+            --theme-background: rgb(20, 20, 20);
+            --entry-background: rgb(35, 35, 35);
+            --entry-background-hover: rgb(50, 50, 50);
+            --entry-dark-text: white;
+            --entry-light-text: rgb(200, 200, 200);
+            --nav-background: rgb(15, 15, 15);
+        }
     }
 
     .container {
@@ -103,6 +125,7 @@
         position: relative;
         display: inline-block;
         width: 60px;
+        min-width: 60px;
         height: 34px;
         margin: 20px;
     }
