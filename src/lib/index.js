@@ -32,6 +32,6 @@ export const typeToColor = {
     water: "#539DDF"
 }
 export function dimColor(color) {
-    return `color-mix(in srgb, ${color} 50%, rgb(130, 130, 130))`;
+    return `color-mix(in srgb, ${color} 45%, rgb(100, 100, 100))`;
 }
 

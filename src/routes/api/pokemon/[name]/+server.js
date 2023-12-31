@@ -1,11 +1,22 @@
 import { json, error } from '@sveltejs/kit';
 import { api, toUrl } from '$lib/index.js';
 import { bfs } from '$lib/functions/bfs.js';
+import { redis } from '$lib/server/redis';
 
 export async function GET({ setHeaders, params }) {
+    const id = parseInt(params.name)
+    if (isNaN(id)) throw error(404, { message: 'Not found' }) // Only accept IDs
+
+    // Redis implementation
+    const cached = await redis.get(id);
+    if (cached) {
+        const ttl = await redis.ttl(id);
+        setHeaders({ 'cache-control': `max-age=${ttl}` })
+        return json(JSON.parse(cached));
+    }
+
     const res = await fetch(api + 'pokemon-species/' + params.name); // Fetch pokemon-species
     if (res.status !== 200) throw error(404, { message: 'Not found' });
-
     let data = await res.json();
 
     // Check if the pokemon is in our list of supported pokemon (i.e. has an image) 
@@ -49,8 +60,10 @@ export async function GET({ setHeaders, params }) {
     const evoRes = await fetch(data.evolution_chain.url);
     cleanData['evolution'] = bfs((await evoRes.json()).chain);
 
-    /* A total of 3 API calls are needed to generate the page */
+    // Redis implementation (a total of 3 API calls are needed to generate this page)
+    redis.set(id, JSON.stringify(cleanData), 'EX', 86400 /* 1 day */);
     const cache = res.headers.get('cache-control');
     if (cache) setHeaders({ 'cache-control': cache });
+
     return json(cleanData);
 }

@@ -22,7 +22,7 @@
 
     onMount(async () => {
         loading = true;
-        const res = await fetch('api/pokemon');
+        const res = await fetch('/api/pokemon');
         data = await res.json();
         store.set({
             data: data,

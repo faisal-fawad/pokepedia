@@ -3,9 +3,6 @@
     import Evolution from '$lib/components/evolution.svelte';
     import Moves from '$lib/components/moves.svelte';
     export let data;
-
-    /* We can get the height of evolution by examining the depth
-    Which we can then use to align the moves height with the evolution tree height */
 </script>
 
 <main class="container">

@@ -2,12 +2,26 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { fly } from 'svelte/transition';
+    import { navigating } from '$app/stores';
+    import { disableScrollHandling, afterNavigate } from '$app/navigation';
     import Modes from '$lib/components/modes.svelte';
 
     let checked = false;
+    let el;
+
+    afterNavigate(async () => {
+        disableScrollHandling();
+        if ($navigating && $navigating.from.url.pathname === $navigating.to.url.pathname) el?.scrollIntoView({ behavior: 'smooth' })
+        else el?.scrollIntoView({ behavior: 'instant' })
+    })
 
     function toggle() {
         window.document.body.classList.toggle('dark-mode');
+    }
+
+    async function determineAnim() {
+        if ($navigating && $navigating.from.url.pathname === $navigating.to.url.pathname) return { y: -250, duration: 1000 }
+        return { y: 250, duration: 1000 }
     }
 
     onMount(async () => {
@@ -18,7 +32,7 @@
     })
 </script>
 
-<div class="container">
+<div class="container" bind:this={el}>
     <nav>
         <label class="switch">
             <input aria-label="search" id="mode" type="checkbox" on:click={toggle} bind:checked={checked}>
@@ -30,9 +44,8 @@
     </nav>
 </div>
 
-
 {#key $page.url.pathname}
-    <div in:fly={{ y: 200, duration: 1000 }}>
+    <div in:fly={{ y: 250, duration: 1000 }}>
         <slot/>
     </div>
 {/key}
@@ -79,6 +92,25 @@
             --entry-light-text: rgb(200, 200, 200);
             --nav-background: rgb(15, 15, 15);
         }
+    }
+
+    /* Scrollbar styling */
+    :global(::-webkit-scrollbar) {
+        width: 10px;
+    }
+
+    :global(::-webkit-scrollbar-track) {
+        background: transparent;
+    }
+
+    :global(::-webkit-scrollbar-thumb) {
+        background: var(--entry-background-hover);
+        transition: .5s;
+    }
+
+    :global(:root) {
+        scrollbar-color: var(--entry-background-hover) transparent;
+        scrollbar-width: 10px;
     }
 
     .container {
