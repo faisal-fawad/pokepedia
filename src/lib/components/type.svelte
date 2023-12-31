@@ -10,7 +10,7 @@
     <li style={"padding-left: 10px;"}>{capitalize(name)}</li>
 {/if}
 <li class="wrapper">
-    <img src={"assets/types/" + name + ".svg"} alt={"Image of " + name + " type"}/>
+    <img src={"/assets/types/" + name + ".svg"} alt={"Image of " + name + " type"}/>
 </li>
 </ul>
 
