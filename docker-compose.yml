@@ -1,0 +1,14 @@
+services:
+  poke:
+    container_name: pokepedia
+    image: pokepedia
+    build:
+      context: .
+      dockerfile: dockerfile
+    user: node
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
