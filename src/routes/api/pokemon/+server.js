@@ -6,7 +6,7 @@ export async function GET({ setHeaders }) {
     const id = 0;
 
     // Redis implementation
-    const cached = await redis.get(id);
+    const cached = await redis?.get(id);
     if (cached) {
         const ttl = await redis.ttl(id);
         setHeaders({ 'cache-control': `max-age=${ttl}` })
@@ -22,7 +22,7 @@ export async function GET({ setHeaders }) {
     }
 
     // Redis implementation
-    redis.set(id, JSON.stringify(data), 'EX', 86400 /* 1 day */);
+    redis?.set(id, JSON.stringify(data), 'EX', 86400 /* 1 day */);
     const cache = res.headers.get('cache-control');
     if (cache) setHeaders({ 'cache-control': cache });
     return json(data);

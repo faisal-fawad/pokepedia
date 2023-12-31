@@ -8,7 +8,7 @@ export async function GET({ setHeaders, params }) {
     if (isNaN(id)) error(404, { message: 'Not found' }); // Only accept IDs
 
     // Redis implementation
-    const cached = await redis.get(id);
+    const cached = await redis?.get(id);
     if (cached) {
         const ttl = await redis.ttl(id);
         setHeaders({ 'cache-control': `max-age=${ttl}` })
@@ -61,7 +61,7 @@ export async function GET({ setHeaders, params }) {
     cleanData['evolution'] = bfs((await evoRes.json()).chain);
 
     // Redis implementation (a total of 3 API calls are needed to generate this page)
-    redis.set(id, JSON.stringify(cleanData), 'EX', 86400 /* 1 day */);
+    redis?.set(id, JSON.stringify(cleanData), 'EX', 86400 /* 1 day */);
     const cache = res.headers.get('cache-control');
     if (cache) setHeaders({ 'cache-control': cache });
 
