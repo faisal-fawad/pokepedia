@@ -5,7 +5,7 @@ import { redis } from '$lib/server/redis';
 
 export async function GET({ setHeaders, params }) {
     const id = parseInt(params.name)
-    if (isNaN(id)) throw error(404, { message: 'Not found' }) // Only accept IDs
+    if (isNaN(id)) error(404, { message: 'Not found' }); // Only accept IDs
 
     // Redis implementation
     const cached = await redis.get(id);
@@ -16,12 +16,12 @@ export async function GET({ setHeaders, params }) {
     }
 
     const res = await fetch(api + 'pokemon-species/' + params.name); // Fetch pokemon-species
-    if (res.status !== 200) throw error(404, { message: 'Not found' });
+    if (res.status !== 200) error(404, { message: 'Not found' });
     let data = await res.json();
 
     // Check if the pokemon is in our list of supported pokemon (i.e. has an image) 
     let url = toUrl(data.id.toString());
-    if ((await fetch(url)).status !== 200) throw error(404, { message: 'Not found' });
+    if ((await fetch(url)).status !== 200) error(404, { message: 'Not found' });
 
     let cleanData = {};
     cleanData['id'] = data.id.toString();
