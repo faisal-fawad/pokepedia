@@ -66,6 +66,8 @@
 
     .moves-container {
         overflow: auto;
+        scrollbar-color: var(--entry-background-hover) transparent;
+        scrollbar-width: thin;
         flex-grow: 1;
         height: calc(100% - 60px) /* 60px come from top and bottom */;
         transition: .5s;

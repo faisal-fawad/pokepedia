@@ -110,7 +110,7 @@
 
     :global(:root) {
         scrollbar-color: var(--entry-background-hover) transparent;
-        scrollbar-width: 10px;
+        scrollbar-width: thin;
     }
 
     .container {

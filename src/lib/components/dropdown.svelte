@@ -102,6 +102,8 @@
         bottom: var(--height);
         width: 100%;
         overflow: auto;
+        scrollbar-color: var(--entry-background-hover) transparent;
+        scrollbar-width: thin;
         list-style: none;
         padding: 0;
         margin: 0;
