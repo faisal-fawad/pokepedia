@@ -16,12 +16,7 @@
     })
 
     function toggle() {
-        window.document.body.classList.toggle('dark-mode');
-    }
-
-    async function determineAnim() {
-        if ($navigating && $navigating.from.url.pathname === $navigating.to.url.pathname) return { y: -250, duration: 1000 }
-        return { y: 250, duration: 1000 }
+        window.document.documentElement.classList.toggle('dark-mode');
     }
 
     onMount(async () => {
@@ -51,7 +46,7 @@
 {/key}
 
 <style>
-    :global(body) {
+    :global(:root) {
         transition: .5s;
         background-color: var(--theme-background);
         --theme-background: white;
@@ -62,7 +57,7 @@
         --nav-background: rgb(250, 250, 250);
     }
 
-    :global(body.dark-mode) {
+    :global(:root.dark-mode) {
         --theme-background: rgb(20, 20, 20);
         --entry-background: rgb(35, 35, 35);
         --entry-background-hover: rgb(50, 50, 50);
@@ -73,7 +68,7 @@
 
     @media (prefers-color-scheme: dark) {
         /* Flipping styles */
-        :global(body.dark-mode) {
+        :global(:root.dark-mode) {
             transition: .5s;
             background-color: var(--theme-background);
             --theme-background: white;
@@ -84,7 +79,7 @@
             --nav-background: rgb(250, 250, 250);
         }
 
-        :global(body) {
+        :global(:root) {
             --theme-background: rgb(20, 20, 20);
             --entry-background: rgb(35, 35, 35);
             --entry-background-hover: rgb(50, 50, 50);
