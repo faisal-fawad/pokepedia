@@ -1,4 +1,4 @@
-# [Poképedia](https://pokepedia.azurewebsites.net/)
+# [Poképedia](https://faisal-pokepedia.vercel.app)
 A scalable recreation of the Pokédex from Pokémon games
 
 ## Description
