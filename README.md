@@ -21,8 +21,9 @@ This app can also be installed by building a Docker image (`docker-compose build
 - [PokéAPI](https://github.com/PokeAPI/pokeapi) for providing real-time data
 - [duiker101](https://github.com/duiker101/pokemon-type-svg-icons) for providing type icons
 
-## Data which needs maintenance
-- Pokémon types [corresponding images](static/assets/types) and [colors](src/lib/index.js). 
+## Future Plans
+- Use a better website hosting platform (application often cold-starts due to inactivity)
+- Avoid usage of hardcoded Pokémon types [corresponding images](static/assets/types) and [colors](src/lib/index.js)
 
 ## Images
 <img src="images/main.png" alt="Image of page">
